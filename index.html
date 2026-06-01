@@ -1,14 +1,878 @@
 <!DOCTYPE html>
-<html lang="ja">
-  <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>BX Workshop 2026</title>
-  </head>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BX Workshop 2026 — NII Tokyo</title>
+<style>
+  :root {
+    --ink: #1a1a18;
+    --ink2: #4a4a46;
+    --ink3: #888880;
+    --bg: #faf9f6;
+    --bg2: #f2f0ea;
+    --bg3: #e8e5dc;
+    --accent: #2b4fa3;
+    --accent2: #e8eef8;
+    --pku: #8b1a1a;
+    --pku-bg: #fdf2f2;
+    --jpn: #1a4a8b;
+    --jpn-bg: #f2f6fd;
+    --bx: #3b2d7a;
+    --bx-bg: #f4f2fc;
+    --db: #1a5c3a;
+    --db-bg: #f0f8f3;
+    --llm: #7a3b1a;
+    --llm-bg: #fcf4f0;
+    --serif: 'Georgia', 'Times New Roman', serif;
+    --sans: 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    background: #0d1520;
+    color: #e8eef8;
+    padding: 80px 0 68px;
+    position: relative;
+    overflow: hidden;
+  }
+  /* 藍布 — diagonal linen weave */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(
+        35deg,
+        rgba(112,144,192,0.09) 0px,
+        rgba(112,144,192,0.09) 1.2px,
+        transparent 1.2px,
+        transparent 8px
+      ),
+      repeating-linear-gradient(
+        125deg,
+        rgba(112,144,192,0.04) 0px,
+        rgba(112,144,192,0.04) 0.6px,
+        transparent 0.6px,
+        transparent 8px
+      );
+    pointer-events: none;
+  }
+  /* subtle vignette */
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 120% 100% at 60% 50%,
+      transparent 40%,
+      rgba(8,12,20,0.55) 100%
+    );
+    pointer-events: none;
+  }
+  /* 藍色 right accent bar */
+  .hero-ink-bar {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(180deg,
+      transparent 0%,
+      #7090c0 25%,
+      #a0b8e0 55%,
+      #7090c0 80%,
+      transparent 100%
+    );
+    opacity: 0.7;
+  }
+  .hero-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 48px 0 32px;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #7090c0;
+    margin-bottom: 22px;
+    font-family: var(--sans);
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(28px, 4.5vw, 48px);
+    font-weight: normal;
+    line-height: 1.16;
+    margin-bottom: 0;
+    color: #e8eef8;
+    letter-spacing: -0.01em;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: #8aacdc;
+  }
+  .hero-rule {
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(90deg, #7090c0, transparent);
+    margin: 22px 0;
+  }
+  .hero-subtitle {
+    font-size: 14px;
+    color: rgba(232,238,248,0.48);
+    margin-bottom: 40px;
+    max-width: 500px;
+    line-height: 1.85;
+    font-family: var(--serif);
+    font-style: italic;
+  }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding-top: 4px;
+  }
+  .hero-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px;
+    color: rgba(232,238,248,0.5);
+    letter-spacing: 0.025em;
+  }
+  .hero-meta-item svg { opacity: 0.4; flex-shrink: 0; }
+
+  /* ── Layout ── */
+  .container { max-width: 860px; margin: 0 auto; padding: 0 32px; }
+
+  section { padding: 56px 0; border-bottom: 1px solid var(--bg3); }
+  section:last-child { border-bottom: none; }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    margin-bottom: 24px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--bg3);
+  }
+
+  h2 {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: normal;
+    margin-bottom: 16px;
+    color: var(--ink);
+  }
+
+  /* ── About ── */
+  .about-text {
+    font-size: 15px;
+    color: var(--ink2);
+    line-height: 1.8;
+    max-width: 680px;
+  }
+  .about-text + .about-text { margin-top: 12px; }
+
+  /* ── Organizer ── */
+  .organizer-card {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--bg2);
+    border: 1px solid var(--bg3);
+    border-radius: 10px;
+    padding: 14px 20px;
+    margin-top: 24px;
+  }
+  .org-avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 600; flex-shrink: 0;
+  }
+  .org-name { font-size: 14px; font-weight: 600; color: var(--ink); }
+  .org-affil { font-size: 12px; color: var(--ink3); }
+
+  /* ── Speakers ── */
+  .speakers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .speaker-card {
+    background: var(--bg2);
+    border: 1px solid var(--bg3);
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .spk-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 600; flex-shrink: 0;
+  }
+  .spk-avatar.pku { background: var(--pku-bg); color: var(--pku); border: 1px solid #f0c8c8; }
+  .spk-avatar.jpn { background: var(--jpn-bg); color: var(--jpn); border: 1px solid #c8d8f0; }
+  .spk-name { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
+  .spk-affil { font-size: 11px; color: var(--ink3); margin-bottom: 4px; }
+  .spk-badge {
+    display: inline-block;
+    font-size: 10px;
+    padding: 1px 7px;
+    border-radius: 10px;
+    font-weight: 500;
+  }
+  .spk-badge.pku { background: var(--pku-bg); color: var(--pku); border: 1px solid #f0c8c8; }
+  .spk-badge.jpn { background: var(--jpn-bg); color: var(--jpn); border: 1px solid #c8d8f0; }
+
+  /* ── Program ── */
+  .day-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin: 32px 0 16px;
+  }
+  .day-header:first-of-type { margin-top: 0; }
+  .day-tag {
+    background: var(--ink);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    padding: 3px 10px;
+    border-radius: 4px;
+  }
+  .day-title {
+    font-size: 14px;
+    color: var(--ink2);
+  }
+
+  .prog-block {
+    border: 1px solid var(--bg3);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  .prog-block.is-break {
+    background: var(--bg2);
+    border-style: dashed;
+  }
+  .prog-block.is-discussion {
+    border-color: #c8d8f0;
+    background: var(--jpn-bg);
+  }
+
+  .session-header {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    padding: 11px 16px;
+    background: #fff;
+    border-bottom: 1px solid var(--bg3);
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .prog-block.is-break .session-header,
+  .prog-block.is-discussion .session-header {
+    border-bottom: none;
+    background: transparent;
+  }
+  .s-time {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink2);
+    min-width: 108px;
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
+  }
+  .s-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    flex: 1;
+  }
+  .s-theme {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+  .theme-bx    { background: var(--bx-bg); color: var(--bx); }
+  .theme-db    { background: var(--db-bg); color: var(--db); }
+  .theme-llm   { background: var(--llm-bg); color: var(--llm); }
+  .theme-mixed { background: var(--jpn-bg); color: var(--jpn); }
+  .s-mix {
+    font-size: 10px;
+    color: var(--ink3);
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  .talks { background: #fff; }
+  .talk-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--bg2);
+  }
+  .talk-row:last-child { border-bottom: none; }
+  .talk-time {
+    font-size: 11px;
+    color: var(--ink3);
+    min-width: 72px;
+    padding-top: 2px;
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
+  }
+  .talk-body { flex: 1; min-width: 0; }
+  .talk-speaker {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 3px;
+  }
+  .talk-title {
+    font-size: 12px;
+    color: var(--ink2);
+    line-height: 1.5;
+    font-style: italic;
+  }
+  .talk-title.tbd { color: var(--ink3); font-style: normal; }
+  .talk-abstract {
+    font-size: 11.5px;
+    color: var(--ink3);
+    line-height: 1.65;
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px solid var(--bg2);
+    display: none;
+  }
+  .talk-row.open .talk-abstract { display: block; }
+  .abstract-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 5px;
+    font-size: 11px;
+    color: var(--ink3);
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: var(--sans);
+    transition: color 0.15s;
+  }
+  .abstract-toggle:hover { color: var(--ink); }
+  .abstract-toggle .toggle-icon {
+    display: inline-block;
+    transition: transform 0.2s;
+    font-style: normal;
+    font-size: 10px;
+  }
+  .talk-row.open .abstract-toggle .toggle-icon { transform: rotate(180deg); }
+
+  .break-inner {
+    padding: 9px 16px;
+    font-size: 13px;
+    color: var(--ink3);
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  .break-inner .s-time { color: var(--ink3); }
+
+  /* ── Venue ── */
+  .venue-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 8px;
+  }
+  @media (max-width: 580px) { .venue-grid { grid-template-columns: 1fr; } }
+  .venue-card {
+    background: var(--bg2);
+    border: 1px solid var(--bg3);
+    border-radius: 10px;
+    padding: 16px 18px;
+  }
+  .venue-card-title { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink3); margin-bottom: 8px; }
+  .venue-card-body { font-size: 14px; color: var(--ink); line-height: 1.7; }
+  .venue-card-body a { color: var(--accent); text-decoration: none; }
+  .venue-card-body a:hover { text-decoration: underline; }
+
+  /* ── Footer ── */
+  footer {
+    background: #0d1520;
+    color: rgba(232,238,248,0.35);
+    text-align: center;
+    padding: 28px 32px;
+    font-size: 12px;
+    border-top: 1px solid rgba(112,144,192,0.2);
+  }
+  footer a { color: rgba(112,144,192,0.7); text-decoration: none; }
+
+  /* ── Legend ── */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .leg { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--ink2); }
+  .leg-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+
+  @media (max-width: 640px) {
+    .hero { padding: 48px 0 40px; }
+    section { padding: 40px 0; }
+    .speakers-grid { grid-template-columns: 1fr; }
+    .session-header { flex-direction: column; align-items: flex-start; gap: 6px; }
+    .s-mix { display: none; }
+  }
+</style>
+</head>
 <body>
-    <h1>BX Workshop 2026</h1>
-  <p>Coming soon...</p>
+
+<!-- Hero -->
+<header class="hero">
+  <div class="hero-ink-bar"></div>
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Joint Workshop &nbsp;·&nbsp; NII Tokyo &nbsp;·&nbsp; 2026</p>
+    <h1>Bidirectional Transformations<br><em>and Their Applications</em></h1>
+    <div class="hero-rule"></div>
+    <p class="hero-subtitle">
+      A joint workshop between Peking University and Japanese universities,
+      centered on the project "Theories and Frameworks for Trustworthy Development
+      of Ubiquitous Information Systems Based on Bidirectional Computing."
+    </p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        July 14–15, 2026
+      </div>
+      <div class="hero-meta-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        National Institute of Informatics (NII), Tokyo
+      </div>
+      <div class="hero-meta-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        11 speakers &nbsp;·&nbsp; 40 min per slot
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- About -->
+<section>
+  <div class="container">
+    <p class="section-label">About</p>
+    <p class="about-text">
+      This workshop brings together researchers from Peking University and Japanese universities
+      to share recent advances in bidirectional transformations (BX), lens theory, database languages,
+      and LLM-assisted software engineering. The event is organized as part of the ongoing joint research
+      project on trustworthy and ubiquitous information systems based on bidirectional computing.
+    </p>
+    <p class="about-text">
+      Talks cover a broad spectrum — from foundational theory of well-behaved lenses and derivative-based BX,
+      to practical applications in SQL view update, collaborative editing, program optimization with LLMs,
+      and graph-augmented software development.
+    </p>
+    <div class="organizer-card">
+      <div class="org-avatar">MO</div>
+      <div>
+        <div class="org-name">Prof. Makoto Onizuka</div>
+        <div class="org-affil">Graduate School of Information Science and Technology, The University of Osaka &nbsp;·&nbsp; <span class="eml"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Speakers -->
+<section>
+  <div class="container">
+    <p class="section-label">Speakers</p>
+    <div class="speakers-grid">
+      <!-- PKU -->
+      <div class="speaker-card">
+        <div class="spk-avatar pku">HZ</div>
+        <div>
+          <div class="spk-name">Hu Zhenjiang</div>
+          <div class="spk-affil">Peking University</div>
+          <span class="spk-badge pku">PKU</span>
+        </div>
+      </div>
+      <div class="speaker-card">
+        <div class="spk-avatar pku">ZH</div>
+        <div>
+          <div class="spk-name">Zhao Haiyan</div>
+          <div class="spk-affil">Peking University</div>
+          <span class="spk-badge pku">PKU</span>
+        </div>
+      </div>
+      <div class="speaker-card">
+        <div class="spk-avatar pku">XY</div>
+        <div>
+          <div class="spk-name">Xiong Yingfei</div>
+          <div class="spk-affil">Peking University</div>
+          <span class="spk-badge pku">PKU</span>
+        </div>
+      </div>
+      <div class="speaker-card">
+        <div class="spk-avatar pku">WF</div>
+        <div>
+          <div class="spk-name">Wang Fusen</div>
+          <div class="spk-affil">Peking University</div>
+          <span class="spk-badge pku">PKU</span>
+        </div>
+      </div>
+      <!-- JPN -->
+      <div class="speaker-card">
+        <div class="spk-avatar jpn">KH</div>
+        <div>
+          <div class="spk-name">Kato Hiroyuki</div>
+          <div class="spk-affil">National Institute of Informatics</div>
+          <span class="spk-badge jpn">Japan</span>
+        </div>
+      </div>
+      <div class="speaker-card">
+        <div class="spk-avatar jpn">HS</div>
+        <div>
+          <div class="spk-name">Hidaka Soichiro</div>
+          <div class="spk-affil">Hosei University</div>
+          <span class="spk-badge jpn">Japan</span>
+        </div>
+      </div>
+      <div class="speaker-card">
+        <div class="spk-avatar jpn">IY</div>
+        <div>
+          <div class="spk-name">Ishihara Yasunori</div>
+          <div class="spk-affil">Nanzan University</div>
+          <span class="spk-badge jpn">Japan</span>
+        </div>
+      </div>
+      <div class="speaker-card">
+        <div class="spk-avatar jpn">XC</div>
+        <div>
+          <div class="spk-name">Xiao Chuan</div>
+          <div class="spk-affil">The University of Osaka</div>
+          <span class="spk-badge jpn">Japan</span>
+        </div>
+      </div>
+      <div class="speaker-card">
+        <div class="spk-avatar jpn">NK</div>
+        <div>
+          <div class="spk-name">Nakano Keisuke</div>
+          <div class="spk-affil">Tohoku University <span style="font-size:10px;color:#888">(July 14 only)</span></div>
+          <span class="spk-badge jpn">Japan</span>
+        </div>
+      </div>
+      <div class="speaker-card">
+        <div class="spk-avatar jpn">MK</div>
+        <div>
+          <div class="spk-name">Matsuda Kazutaka</div>
+          <div class="spk-affil">Tohoku University</div>
+          <span class="spk-badge jpn">Japan</span>
+        </div>
+      </div>
+      <div class="speaker-card">
+        <div class="spk-avatar jpn">OM</div>
+        <div>
+          <div class="spk-name">Onizuka Makoto</div>
+          <div class="spk-affil">The University of Osaka</div>
+          <span class="spk-badge jpn">Japan</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Program -->
+<section>
+  <div class="container">
+    <p class="section-label">Program</p>
+
+    <div class="legend">
+      <div class="leg"><div class="leg-dot" style="background:#3b2d7a"></div>BX foundations</div>
+      <div class="leg"><div class="leg-dot" style="background:#1a5c3a"></div>BX × DB / Transformations</div>
+      <div class="leg"><div class="leg-dot" style="background:#7a3b1a"></div>LLM / Software engineering</div>
+      <div class="leg"><div class="leg-dot" style="background:#1a4a8b"></div>Mixed themes</div>
+    </div>
+
+    <!-- Day 1 -->
+    <div class="day-header">
+      <span class="day-tag">Day 1</span>
+      <span class="day-title">Tuesday, July 14, 2026</span>
+    </div>
+
+    <!-- Session 1 -->
+    <div class="prog-block">
+      <div class="session-header">
+        <span class="s-time">10:00 – 12:00</span>
+        <span class="s-label">Session 1 &nbsp;·&nbsp; BX foundations &amp; lens theory</span>
+        <span class="s-theme theme-bx">BX foundations</span>
+        <span class="s-mix">PKU×1 + JPN×2</span>
+      </div>
+      <div class="talks">
+        <div class="talk-row">
+          <span class="talk-time">10:00–10:40</span>
+          <div class="talk-body">
+            <div class="talk-speaker">Hu Zhenjiang <span class="spk-badge pku">PKU</span></div>
+            <div class="talk-title">Derivative-based Bidirectional Programming</div>
+            <button class="abstract-toggle" onclick="toggleAbstract(this)">Abstract <span class="toggle-icon">▾</span></button>
+          <div class="talk-abstract">Approaches to developing BXs can be mainly categorized into get-based and put-based approaches, which suffer from ambiguity and specification complexity, respectively. In this paper, we propose a novel derivative-based framework to bidirectional programming, where BX is specified through get′, the derivative of get. From get′, we systematically derive well-behaved BXs via integration and right inversion, and prove completeness for all well-behaved BXs. We demonstrate its usefulness in bidirectional programming on relational databases and trees. (Joint work with Guanchen Guo, Xiao He, and Tao Zan.)</div>
+          </div>
+        </div>
+        <div class="talk-row">
+          <span class="talk-time">10:40–11:20</span>
+          <div class="talk-body">
+            <div class="talk-speaker">Nakano Keisuke <span class="spk-badge jpn">Japan</span></div>
+            <div class="talk-title">Characterisation of Computable Well-Behaved Lenses</div>
+          </div>
+        </div>
+        <div class="talk-row">
+          <span class="talk-time">11:20–12:00</span>
+          <div class="talk-body">
+            <div class="talk-speaker">Matsuda Kazutaka <span class="spk-badge jpn">Japan</span></div>
+            <div class="talk-title tbd">Title TBD (BX foundations)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lunch -->
+    <div class="prog-block is-break">
+      <div class="break-inner">
+        <span class="s-time">12:00 – 13:30</span>
+        <span>Lunch break</span>
+      </div>
+    </div>
+
+    <!-- Session 2 -->
+    <div class="prog-block">
+      <div class="session-header">
+        <span class="s-time">13:30 – 15:30</span>
+        <span class="s-label">Session 2 &nbsp;·&nbsp; BX × databases &amp; transformations</span>
+        <span class="s-theme theme-db">BX × DB / Transform</span>
+        <span class="s-mix">PKU×1 + JPN×2</span>
+      </div>
+      <div class="talks">
+        <div class="talk-row">
+          <span class="talk-time">13:30–14:10</span>
+          <div class="talk-body">
+            <div class="talk-speaker">Kato Hiroyuki <span class="spk-badge jpn">Japan</span></div>
+            <div class="talk-title">Towards Compositional Translation of SQL View Update Statements</div>
+          </div>
+        </div>
+        <div class="talk-row">
+          <span class="talk-time">14:10–14:50</span>
+          <div class="talk-body">
+            <div class="talk-speaker">Hidaka Soichiro <span class="spk-badge jpn">Japan</span></div>
+            <div class="talk-title">Towards Stable Multi-directional Transformations using Bidirectional Transformations and Operational Transformations</div>
+          </div>
+        </div>
+        <div class="talk-row">
+          <span class="talk-time">14:50–15:30</span>
+          <div class="talk-body">
+            <div class="talk-speaker">Zhao Haiyan <span class="spk-badge pku">PKU</span></div>
+            <div class="talk-title">Bridging the Semantic Gap in Software Development with Graph-Augmented LLMs</div>
+            <button class="abstract-toggle" onclick="toggleAbstract(this)">Abstract <span class="toggle-icon">▾</span></button>
+          <div class="talk-abstract">Large language models (LLMs) have demonstrated remarkable capabilities in general software engineering tasks, yet they face fundamental challenges when applied to repository-level scenarios: (1) the semantic gap between natural language issue descriptions and source code, which manifests as symptom-to-cause and one-to-many mismatches in issue localization; and (2) the lack of repository-specific knowledge (e.g., local APIs, coding styles, dependency patterns) in pre-trained LLMs for code generation/completion. To address the challenges, we propose a fine-grained, graph-based modeling approach for code repositories, presenting recent work on core repository-level tasks that correspond to different phases of the repository lifecycle through Graph-Augmented LLMs.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Break -->
+    <div class="prog-block is-break">
+      <div class="break-inner">
+        <span class="s-time">15:30 – 15:50</span>
+        <span>Break</span>
+      </div>
+    </div>
+
+    <!-- Session 3 -->
+    <div class="prog-block">
+      <div class="session-header">
+        <span class="s-time">15:50 – 17:10</span>
+        <span class="s-label">Session 3 &nbsp;·&nbsp; LLMs &amp; program languages</span>
+        <span class="s-theme theme-llm">LLM / SE</span>
+        <span class="s-mix">PKU×1 + JPN×1</span>
+      </div>
+      <div class="talks">
+        <div class="talk-row">
+          <span class="talk-time">15:50–16:30</span>
+          <div class="talk-body">
+            <div class="talk-speaker">Xiong Yingfei <span class="spk-badge pku">PKU</span></div>
+            <div class="talk-title">A DSL for Program Optimization</div>
+            <button class="abstract-toggle" onclick="toggleAbstract(this)">Abstract <span class="toggle-icon">▾</span></button>
+          <div class="talk-abstract">With the development of large language models (LLMs), more and more program optimization tasks could be delegated to LLMs. However, purely relying on LLMs for optimizing large software projects has two drawbacks: (1) Correctness — LLM optimization does not ensure correctness, and optimized code still needs to be checked by programmers, creating a bottleneck; (2) Cost — scanning and optimizing a whole software project with an LLM is expensive, preventing frequent use. Therefore, instead of asking an LLM to directly optimize the program, we ask an LLM to write optimization rules, and design a domain-specific language (DSL) for such rules. The DSL features verifiability and LLM-affinity: each rule can be automatically verified, and errors reported by the verifier are interpretable at the surface level for the LLM.</div>
+          </div>
+        </div>
+        <div class="talk-row">
+          <span class="talk-time">16:30–17:10</span>
+          <div class="talk-body">
+            <div class="talk-speaker">Xiao Chuan <span class="spk-badge jpn">Japan</span></div>
+            <div class="talk-title tbd">Title TBD (LLM research)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wrap-up -->
+    <div class="prog-block is-break">
+      <div class="break-inner">
+        <span class="s-time">17:10 – 18:00</span>
+        <span>Wrap-up / buffer</span>
+      </div>
+    </div>
+
+    <!-- Day 2 -->
+    <div class="day-header">
+      <span class="day-tag">Day 2</span>
+      <span class="day-title">Wednesday, July 15, 2026</span>
+    </div>
+
+    <!-- Session 4 -->
+    <div class="prog-block">
+      <div class="session-header">
+        <span class="s-time">10:00 – 12:00</span>
+        <span class="s-label">Session 4 &nbsp;·&nbsp; BX × databases &amp; collaborative editing</span>
+        <span class="s-theme theme-mixed">Mixed themes</span>
+        <span class="s-mix">PKU×1 + JPN×2</span>
+      </div>
+      <div class="talks">
+        <div class="talk-row">
+          <span class="talk-time">10:00–10:40</span>
+          <div class="talk-body">
+            <div class="talk-speaker">Wang Fusen <span class="spk-badge pku">PKU</span></div>
+            <div class="talk-title">View-based Collaborative Editing via Lenses</div>
+            <button class="abstract-toggle" onclick="toggleAbstract(this)">Abstract <span class="toggle-icon">▾</span></button>
+          <div class="talk-abstract">Collaborative editing systems, exemplified by Google Docs, have revolutionized collaboration by enabling simultaneous updates and strong eventual consistency with offline support. However, these systems often lack fine-grained access control, requiring all participants to maintain full data replicas. This leads to two critical issues: privacy risks from exposing sensitive data to unauthorized collaborators, and excessive cognitive load for users who must manually filter irrelevant information. We propose a new idea of view-based collaborative editing, and present a general framework integrating CRDTs and Bidirectional Transformations (lenses). We introduce a lens source-lifting algorithm that extends existing lenses to support replicated data types on the source side, and design a concurrent synchronization protocol to maintain consistency between sources and views across distributed nodes. We have implemented our approach in ViewSync, a prototype for view-based collaborative JSON editing.</div>
+          </div>
+        </div>
+        <div class="talk-row">
+          <span class="talk-time">10:40–11:20</span>
+          <div class="talk-body">
+            <div class="talk-speaker">Ishihara Yasunori <span class="spk-badge jpn">Japan</span></div>
+            <div class="talk-title">Improving the Dejima Architecture (tentative)</div>
+          </div>
+        </div>
+        <div class="talk-row">
+          <span class="talk-time">11:20–12:00</span>
+          <div class="talk-body">
+            <div class="talk-speaker">Onizuka Makoto <span class="spk-badge jpn">Japan</span></div>
+            <div class="talk-title">Hard to Read, Hard to Maintain? Refactoring Complex SQL into Wvlet Pipelines</div>
+            <button class="abstract-toggle" onclick="toggleAbstract(this)">Abstract <span class="toggle-icon">▾</span></button>
+          <div class="talk-abstract">Modern analytical SQL queries are often hard to read and maintain because of duplicated logic, deep nesting, and the gap between clause order and logical data flow. We present <em>Wvlet Cognitive Workbench</em> (WCW), a browser-based system for readability-oriented query refactoring. WCW transforms SQL into Wvlet, improves query structure through duplicate extraction and safe join flattening, and supports side-by-side comparison with readability metrics and semantic equivalence checking. Our system also supports workload-level refactoring by extracting shared reusable models across multiple queries.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lunch -->
+    <div class="prog-block is-break">
+      <div class="break-inner">
+        <span class="s-time">12:00 – 13:30</span>
+        <span>Lunch break</span>
+      </div>
+    </div>
+
+    <!-- Project Discussion -->
+    <div class="prog-block is-discussion">
+      <div class="session-header">
+        <span class="s-time">13:30 – 15:00</span>
+        <span class="s-label">Project discussion</span>
+        <span class="s-theme theme-mixed">All participants</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Venue -->
+<section>
+  <div class="container">
+    <p class="section-label">Venue &amp; Access</p>
+    <div class="venue-grid">
+      <div class="venue-card">
+        <div class="venue-card-title">Venue</div>
+        <div class="venue-card-body">
+          National Institute of Informatics (NII)<br>
+          2-1-2 Hitotsubashi, Chiyoda-ku<br>
+          Tokyo 101-8430, Japan<br>
+          <a href="https://www.nii.ac.jp/en/about/access/" target="_blank">Access map →</a>
+        </div>
+      </div>
+      <div class="venue-card">
+        <div class="venue-card-title">Accommodation (recommended)</div>
+        <div class="venue-card-body">
+          KKR Hotel Tokyo<br>
+          4-1 Kudan-Minami, Chiyoda-ku<br>
+          Tokyo 102-0074, Japan<br>
+          <a href="https://tokyo.kkr.or.jp/" target="_blank">Hotel website →</a>
+        </div>
+      </div>
+      <div class="venue-card">
+        <div class="venue-card-title">Organizer contact</div>
+        <div class="venue-card-body">
+          Prof. Makoto Onizuka<br>
+          The University of Osaka<br>
+          <a href="#" class="eml-link">onizuka@ist.osaka-u.ac.jp</a>
+        </div>
+      </div>
+      <div class="venue-card">
+        <div class="venue-card-title">Related project</div>
+        <div class="venue-card-body">
+          Theories and Frameworks for Trustworthy Development of Ubiquitous Information Systems Based on Bidirectional Computing<br>
+          <a href="https://pl.cs.pku.edu.cn/joint-workshop.html" target="_blank">Past workshop (PKU) →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>BX Workshop 2026 &nbsp;·&nbsp; National Institute of Informatics, Tokyo &nbsp;·&nbsp; Organized by <a href="#" class="eml-link">Prof. Makoto Onizuka</a>, The University of Osaka</p>
+</footer>
+
+<script>
+(function(){
+  var u='onizuka',d='ist.osaka-u.ac.jp',e=u+'@'+d;
+  document.querySelectorAll('.eml').forEach(function(el){el.textContent=e;});
+  document.querySelectorAll('.eml-link').forEach(function(el){el.href='mailto:'+e;});
+})();
+function toggleAbstract(btn){
+  var row=btn.closest('.talk-row');
+  row.classList.toggle('open');
+}
+</script>
 </body>
-</html>html></p></h1>
-</body></title>
-  </head>
+</html>
