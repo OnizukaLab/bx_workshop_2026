@@ -810,9 +810,11 @@
           <span class="talk-time">11:20–12:00</span>
           <div class="talk-body">
             <div class="talk-speaker">Makoto Onizuka <span class="spk-badge jpn">Japan</span></div>
-            <div class="talk-title">Hard to Read, Hard to Maintain? Refactoring Complex SQL into Wvlet Pipelines</div>
+            <div class="talk-title">1) TraceableRAG: A Framework for Traceable and Evidence-Grounded Generation, 2) Hard to Read, Hard to Maintain? Refactoring Complex SQL into Wvlet Pipelines</div>
             <button class="abstract-toggle" onclick="toggleAbstract(this)">Abstract <span class="toggle-icon">▾</span></button>
-          <div class="talk-abstract">Modern analytical SQL queries are often hard to read and maintain because of duplicated logic, deep nesting, and the gap between clause order and logical data flow. We present <em>Wvlet Cognitive Workbench</em> (WCW), a browser-based system for readability-oriented query refactoring. WCW transforms SQL into Wvlet, improves query structure through duplicate extraction and safe join flattening, and supports side-by-side comparison with readability metrics and semantic equivalence checking. Our system also supports workload-level refactoring by extracting shared reusable models across multiple queries.</div>
+          <div class="talk-abstract">
+            1) TraceableRAG treats LLM dialogue histories as a context database for future generation tasks. It addresses three requirements: selecting contexts relevant to each artifact section, generating statements grounded only in retrieved evidence, and tracing user feedback back to the responsible contexts and generation rules. The framework segments and labels dialogue histories, performs section-aware retrieval, applies policy- and evidence-constrained generation, and records block-level provenance. When users identify an error, TraceableRAG diagnoses its cause, updates the retrieval knowledge or generation policy, and regenerates only the affected content.
+            2) Modern analytical SQL queries are often hard to read and maintain because of duplicated logic, deep nesting, and the gap between clause order and logical data flow. We present <em>Wvlet Cognitive Workbench</em> (WCW), a browser-based system for readability-oriented query refactoring. WCW transforms SQL into Wvlet, improves query structure through duplicate extraction and safe join flattening, and supports side-by-side comparison with readability metrics and semantic equivalence checking. Our system also supports workload-level refactoring by extracting shared reusable models across multiple queries.</div>
           </div>
         </div>
       </div>
